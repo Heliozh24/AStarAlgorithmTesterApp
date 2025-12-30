@@ -1,5 +1,5 @@
 # AStarAlgorithmTesterApp
-A simple interactive app aiming to show in the simplest and most intuitive way how the fundamental A Star Algorith works and manages to find the best path possible.
+A simple interactive app aiming to show in the simplest and most intuitive way how the fundamental A Star Algorithm works and manages to find the best path possible.
 A 12x6 grid is present where:
 Nodes can be placed using left click, removing nodes using right click.
 "Start Node" (color orange), the node which the algorithm will start searching from. Clicking on another grid node will "move" the start node, as there can't be more than 1 starting positions at a time.
