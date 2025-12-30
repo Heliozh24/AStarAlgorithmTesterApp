@@ -19,4 +19,7 @@ Undo Last Action Button: Works just like any other Undo Button present in any ot
 Save Current Instance Button: Saves the current set up of the grid. This is done by saving the actions done by the user on a .txt file saved on the bin/assets folder named "FileManagerOutput.txt".
 Load Last Saved Instance Button: Loads the last instance which the user saved by pressing the Save Current Instance button. This is done by decoding the FileManagerOutput.txt file's data and applying them into the application.
 
+HOW TO RUN:
+Download the A_Star_Algorithm_Tester_App file using the Code --> Download Zip buttons. Then, extract the file, go to A_StarAlgorithm_Tester_App --> bin --> A_Star_Algorithm_Tester_App.exe and click on it to run. If it does not run, you might need to install Microsoft Visual C++ Redistributable. Your Anti-Virus might warn you that the app is not safe. If you are worried about this app's safety, you can freely check the code of the application on the files that you just downloaded.
+
 This application was made by Helio Zhuleku on December of 2025 with the C++ Programming Language using the SGG Graphics Library, more info on the library can be found here --> https://github.com/cgaueb/sgg/tree/main
