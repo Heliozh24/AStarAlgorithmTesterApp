@@ -8,8 +8,8 @@ Nodes can be placed using left click, removing nodes using right click.
 
 "Start Test" and "End Test" buttons activate and deactivate the algorithm respectively.
 While the algorithm is running, gray boxes with the shape of nodes, will start showing up showing which neighbor nodes the algorithm is currently searching, showcasing gCost,hCost,fCost.
-gCost: The cost to move from the starting node to another node using the path which has been selected so far. This path may not be necessarily the final path. That means the gCost of any node can change at any time because we might find a better path towards that node.
-hCost: The cost to move from one node to the end node. This cost is constant.
+gCost: The cost to move from the starting node to another node using the path which has been selected so far. That means we calculate the distance of each node that consints the path we are currently analysing with the start node and we sum these distances, here we use Manhttan Distance formula.This path may not be necessarily the final path. That means the gCost of any node can change at any time because we might find a better path towards that node.
+hCost: The cost to move from one node to the end node. This cost is calculated by measuring the distance from one node to the end node. Here we use the Manhattan Distance. This cost is constant.
 fCost: the sum of gCost and hCost.
 After the algorithm has finished searching the best path, it creates "Steps" ( green boxes with the shape of nodes ), which show what path the algorithm managed to find.
 If the algorithm fails to find a path, the user will be notified.
