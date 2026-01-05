@@ -43,7 +43,7 @@ void Node::checkIfPressed(graphics::MouseState& mouse)
 	float mouseY = graphics::windowToCanvasY(mouse.cur_pos_y);
 	if (getPosX() - getWidth() / 2 <= mouseX && mouseX <= getPosX() + getWidth() / 2 && getPosY() - getHeight() / 2 <= mouseY && mouseY <= getPosY() + getHeight() / 2)
 	{
-		std::pair<float, float> nodePosPair = *getPosPair();
+		std::pair<float, float> nodePosPair = *getPosPair(); // saving data because we are deleting this current node and we are going to need its data
 		float width = getWidth();
 		float height = getHeight();
 		int pos = GlobalState::getInstance()->getNodeMap()->at(*getPosPair());
@@ -53,25 +53,25 @@ void Node::checkIfPressed(graphics::MouseState& mouse)
 			NodeManager::deleteNode(*getPosPair());
 			if (ChoiceButton::getChoice() == "Obstacle Node")
 			{
-				NodeManager::insertNode<ObstacleNode>(nodePosPair,0.4f,0.6f);
-				GlobalState::getInstance()->getStackGridAction()->push(GridAction(std::pair<float, float>(nodePosPair.first, nodePosPair.second), nodeTypeToBringBack));
+				NodeManager::insertNode<ObstacleNode>(nodePosPair,width,height);
+				GlobalState::getInstance()->getStackGridAction()->push(GridAction(nodePosPair, nodeTypeToBringBack));
 			}
 			else if (ChoiceButton::getChoice() == "Start Node")
 			{
-				GlobalState::getInstance()->getStackGridAction()->push(GridAction(std::pair<float, float>(nodePosPair.first, nodePosPair.second), nodeTypeToBringBack, StartNode::getLastStartNodePositions(), "Start Node"));
-				NodeManager::insertStartOrEndNode<StartNode>(nodePosPair, 0.4f, 0.6f);
+				GlobalState::getInstance()->getStackGridAction()->push(GridAction(nodePosPair, nodeTypeToBringBack, StartNode::getLastStartNodePositions(), "Start Node"));
+				NodeManager::insertStartOrEndNode<StartNode>(nodePosPair, width,height);
 			}
 			else
 			{
-				GlobalState::getInstance()->getStackGridAction()->push(GridAction(std::pair<float, float>(nodePosPair.first, nodePosPair.second), nodeTypeToBringBack, EndNode::getLastEndNodePositions(), "End Node"));
-				NodeManager::insertStartOrEndNode<EndNode>(nodePosPair, 0.4f, 0.6f);
+				GlobalState::getInstance()->getStackGridAction()->push(GridAction(nodePosPair, nodeTypeToBringBack, EndNode::getLastEndNodePositions(), "End Node"));
+				NodeManager::insertStartOrEndNode<EndNode>(nodePosPair, width,height);
 			}
 		}
 		else if (mouse.button_right_pressed && !mouse.button_left_pressed)
 		{
 			NodeManager::deleteNode(*getPosPair());
-			NodeManager::insertNode<EmptyNode>(nodePosPair, 0.4f, 0.6f);
-			GlobalState::getInstance()->getStackGridAction()->push(GridAction(std::pair<float, float>(nodePosPair.first, nodePosPair.second), nodeTypeToBringBack));
+			NodeManager::insertNode<EmptyNode>(nodePosPair, width,height);
+			GlobalState::getInstance()->getStackGridAction()->push(GridAction(nodePosPair, nodeTypeToBringBack));
 		}
 	}
 }
