@@ -38,7 +38,7 @@ void ChoiceButton::checkIfPressed(graphics::MouseState& mouse)
 				int pos2 = GlobalState::getInstance()->getPressableMap()->at(std::pair<float, float>(activeChoiceButtonX, activeChoiceButtonY));
 				ChoiceButton* buttonPressable = (ChoiceButton*)(GlobalState::getInstance()->getPressableVector()->at(pos2));
 				buttonPressable->setFillColor(buttonPressable->getDefaultColors()[0], buttonPressable->getDefaultColors()[1], buttonPressable->getDefaultColors()[2]);
-				buttonPressable->setFillColor(buttonPressable->getDefaultColors()[0], buttonPressable->getDefaultColors()[1], buttonPressable->getDefaultColors()[2]);
+				buttonPressable->setOutlineColor(buttonPressable->getDefaultColors()[0], buttonPressable->getDefaultColors()[1], buttonPressable->getDefaultColors()[2]);
 				buttonPressable->setClicked(!buttonPressable->clicked);
 
 			}
