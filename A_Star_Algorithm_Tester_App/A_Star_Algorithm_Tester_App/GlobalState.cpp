@@ -53,9 +53,9 @@ void GlobalState::adjustButtonTitle(std::pair<float, float> posPair, float dx) /
 {
 	int posGfxVector = gfxMap->at(posPair);
 	int posPressableVector = pressableMap->at(posPair);
-	Button* button1 = (Button*)(gfxElementVector->at(posGfxVector));
+	Button* button1 = static_cast<Button*>(gfxElementVector->at(posGfxVector));
 	button1->moveTitle(dx);
-	Button* button2 = (Button*)(pressableVector->at(posPressableVector));
+	Button* button2 = static_cast<Button*>(pressableVector->at(posPressableVector));
 	button2->moveTitle(dx);
 }
 
