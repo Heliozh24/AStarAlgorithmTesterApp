@@ -31,14 +31,13 @@ void ChoiceButton::checkIfPressed(graphics::MouseState& mouse)
 			if (activeChoiceButtonX != -1 && activeChoiceButtonY != -1)
 			{ // radio button logic, only 1 button can be active at the time, the active button turns off and the current one activates
 				int pos1 = GlobalState::getInstance()->getGfxMap()->at(std::pair<float, float>(activeChoiceButtonX, activeChoiceButtonY));
-				ChoiceButton* buttonGfx = (ChoiceButton*)(GlobalState::getInstance()->getGfxElementVector()->at(pos1));
-				buttonGfx->setFillColor(buttonGfx->getDefaultColors()[0], buttonGfx->getDefaultColors()[1], buttonGfx->getDefaultColors()[2]);
-				buttonGfx->setOutlineColor(buttonGfx->getDefaultColors()[0], buttonGfx->getDefaultColors()[1], buttonGfx->getDefaultColors()[2]);
-				buttonGfx->setClicked(!buttonGfx->clicked); // changes colors and turns off the previous active button, same thing is being done for its replica on the pressable vector
+				ChoiceButton* buttonGfx = static_cast<ChoiceButton*>(GlobalState::getInstance()->getGfxElementVector()->at(pos1));
+				// static_cast to ChoiceButton*, faster and we are 100% sure we are getting a choiceButton
+				// because of the pos we got from the maps
+				buttonGfx->setClicked(!buttonGfx->clicked); // turns off the previous active button, same thing is being done for its replica on the pressable vector
 				int pos2 = GlobalState::getInstance()->getPressableMap()->at(std::pair<float, float>(activeChoiceButtonX, activeChoiceButtonY));
-				ChoiceButton* buttonPressable = (ChoiceButton*)(GlobalState::getInstance()->getPressableVector()->at(pos2));
-				buttonPressable->setFillColor(buttonPressable->getDefaultColors()[0], buttonPressable->getDefaultColors()[1], buttonPressable->getDefaultColors()[2]);
-				buttonPressable->setOutlineColor(buttonPressable->getDefaultColors()[0], buttonPressable->getDefaultColors()[1], buttonPressable->getDefaultColors()[2]);
+				ChoiceButton* buttonPressable = static_cast<ChoiceButton*>(GlobalState::getInstance()->getPressableVector()->at(pos2));
+				buttonPressable->changeButtonColor(buttonPressable->getDefaultColors()); // the changeButtonColor method will also change the color of the replica on the gfx vector
 				buttonPressable->setClicked(!buttonPressable->clicked);
 
 			}
@@ -55,11 +54,7 @@ void ChoiceButton::checkIfPressed(graphics::MouseState& mouse)
 			{
 				choice = "Obstacle Node";
 			}
-			setFillColor(getClickedColors()[0], getClickedColors()[1], getClickedColors()[2]);
-			setOutlineColor(getClickedColors()[0], getClickedColors()[1], getClickedColors()[2]);
-			int pos = GlobalState::getInstance()->getGfxMap()->at(*getPosPair()); // color changing logic for the current button that we press
-			GlobalState::getInstance()->getGfxElementVector()->at(pos)->setFillColor(getClickedColors()[0], getClickedColors()[1], getClickedColors()[2]);
-			GlobalState::getInstance()->getGfxElementVector()->at(pos)->setOutlineColor(getClickedColors()[0], getClickedColors()[1], getClickedColors()[2]);
+			changeButtonColor(getClickedColors());
 			activeChoiceButtonX = getPosX();
 			activeChoiceButtonY = getPosY();
 		}
@@ -69,11 +64,7 @@ void ChoiceButton::checkIfPressed(graphics::MouseState& mouse)
 			choice = " ";
 			activeChoiceButtonX = -1; 
 			activeChoiceButtonY = -1;
-			setFillColor(getDefaultColors()[0], getDefaultColors()[1], getDefaultColors()[2]);
-			setOutlineColor(getDefaultColors()[0], getDefaultColors()[1], getDefaultColors()[2]);
-			int pos = GlobalState::getInstance()->getGfxMap()->at(*getPosPair()); // color changing logic
-			GlobalState::getInstance()->getGfxElementVector()->at(pos)->setFillColor(getDefaultColors()[0], getDefaultColors()[1], getDefaultColors()[2]);
-			GlobalState::getInstance()->getGfxElementVector()->at(pos)->setOutlineColor(getDefaultColors()[0], getDefaultColors()[1], getDefaultColors()[2]);
+			changeButtonColor(getDefaultColors());
 		}
 	}
 }
