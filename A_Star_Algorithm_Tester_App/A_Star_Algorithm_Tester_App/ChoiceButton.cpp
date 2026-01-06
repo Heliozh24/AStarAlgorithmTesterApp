@@ -41,19 +41,7 @@ void ChoiceButton::checkIfPressed(graphics::MouseState& mouse)
 				buttonPressable->setClicked(!buttonPressable->clicked);
 
 			}
-
-			if (getTitle()->getString() == "Start Node")
-			{
-				choice = "Start Node";
-			}
-			else if (getTitle()->getString() == "End Node")
-			{
-				choice = "End Node";
-			}
-			else
-			{
-				choice = "Obstacle Node";
-			}
+			choice = getTitle()->getString();
 			changeButtonColor(getClickedColors());
 			activeChoiceButtonX = getPosX();
 			activeChoiceButtonY = getPosY();
